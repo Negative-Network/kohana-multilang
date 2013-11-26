@@ -63,11 +63,13 @@ class Multilang_Core {
 		// Get the list of supported languages
 		$langs = $config->languages;
 
-		// Set the language in I18n
-		I18n::lang($langs[Request::$lang]['i18n']);
+		if (Request::$lang){
+			// Set the language in I18n
+			I18n::lang($langs[Request::$lang]['i18n']);
 
-		// Set locale
-		setlocale(LC_ALL, $langs[Request::$lang]['locale']);
+			// Set locale
+			setlocale(LC_ALL, $langs[Request::$lang]['locale']);
+		}
 
 		$cookie = $config->cookie;
 		// Update language cookie if needed
