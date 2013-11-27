@@ -48,6 +48,15 @@ class Multilang_Core {
 					return $lang;
 				}
 			}
+			// if we don't find the perfect language try without regional code
+			foreach(Request::accept_lang() as $lang => $quality)
+			{
+				// Return the first language found (the language with the highest quality)
+				if(isset($languages[substr($lang, 0, 2)]))
+				{
+					return substr($lang, 0, 2);
+				}
+			}
 		}
 		// Return the hard-coded default language as final fallback
 		return $config->default;
