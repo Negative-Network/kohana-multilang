@@ -182,7 +182,7 @@ class Multilang_Request extends Kohana_Request {
 		}
 		
 		$config = Kohana::$config->load('multilang');
-		if($config->hide_default AND $this->param('lang') === NULL OR  $this->_route->lang === NULL AND $this->param('lang') === NULL)
+		if($config->hide_default AND $this->param('lang') === NULL OR  $this->_route->lang === NULL AND $this->param('lang') === NULL AND Request::is_initial())
 		{
 			// Request::$lang = $config->default;
 			Request::$lang = Multilang::find_user_language();
@@ -191,7 +191,9 @@ class Multilang_Request extends Kohana_Request {
 		{			
 			Request::$lang = $this->param('lang');
 		}
-		Multilang::init();
+
+		// Multilang::init();
+
 		
 		return $this->_client->execute($this);
 	}
