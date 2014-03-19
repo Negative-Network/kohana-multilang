@@ -174,7 +174,10 @@ class Multilang_Request extends Kohana_Request {
 				':uri' => $this->_uri,
 			));
 		}
-		
+		if( !isset($this->_route->lang))
+		{
+			$this->_route->lang = NULL;
+		}
 		// Multilang part
 		if(Request::$lang === NULL)
 		{
