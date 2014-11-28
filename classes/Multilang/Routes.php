@@ -60,6 +60,27 @@ class Multilang_Routes {
 
 
 	/**
+	 * Set the filter callback for each route
+	 * @param array $defaults
+	 * @return Multilang_Routes
+	 */
+	public function filter($callback)
+	{
+		foreach($this->_routes as $route)
+		{
+
+			if ( ! is_callable($callback))
+			{
+				throw new Kohana_Exception('Invalid Route::callback specified');
+			}
+
+			$route->filter($callback);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Set the defaults values for each route
 	 * @param array $defaults
 	 * @return Multilang_Routes
