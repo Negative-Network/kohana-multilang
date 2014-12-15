@@ -7,6 +7,7 @@ class Multilang_Route extends Kohana_Route {
 
 	public $lang = NULL;
 
+
 	/**
 	 * Altered method to allow a language
 	 * 	 *
@@ -62,8 +63,9 @@ class Multilang_Route extends Kohana_Route {
 			
 		} // then the default language
 		elseif(isset(Route::$_routes[Kohana::$config->load('multilang')->default.'.'.$name])) {
-			$name = $config->default.'.'.$name;
+			$name = Kohana::$config->load('multilang')->default.'.'.$name;
 		}
+
 		// And if we don't have any for this language, it means that route is neither defined nor multilingual		
 		return parent::get($name);
 	}
@@ -342,5 +344,5 @@ class Multilang_Route extends Kohana_Route {
 
 		return $params;
 	}
-	
+
 }
